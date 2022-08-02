@@ -1,0 +1,79 @@
+
+.headerhome{
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+}
+.header{ 
+    background-color: #FFFFFF;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+.total-contacts{
+    margin-left: 250px;
+    font-family: 'Titillium Web';
+    width: 150px;
+}
+
+.header-container{
+    font-family: 'Titillium Web';
+    margin-bottom: 10px;
+}
+
+.search{  
+    background: url("../Header/image/Vector.png") left    no-repeat;
+    height:35px;
+    width: 350px;
+    padding-left:50px; 
+    align-items: center;
+    justify-content: center;
+    font-family: 'Titillium Web';
+    background-color: #F2F2F2;
+    border: none;
+}
+.searchbar{
+    position: absolute;
+    width: 300px;
+    left: 600px;
+    height: 30px;
+}
+.user-details{
+    display: flex;
+   position: absolute;
+   left: 1150px;
+   
+}
+.userimg{
+    height: 50px;
+    width: 50px;
+    padding-right: 10px;
+    
+}
+.user-name{
+    display: flex;
+    flex-direction: column;
+    
+}
+#user-name{
+    font-size: larger;
+    font-weight: bold;
+}
+.searchedEmail{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    width: 400px;
+    top: 80px;
+    left: 600px;
+    background-color: white;
+}
+.span{
+    height: 30px;
+    background-color: white;
+    z-index: 999;
+}
+.searchdisplay{
+    visibility: hidden;
+}

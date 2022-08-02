@@ -1,0 +1,87 @@
+body{
+    overflow: hidden;
+}
+.ellipse1{
+    position: absolute;
+    width: 270px;
+    height: 270px;
+    left: -45px;
+    top: -44px;
+    background: #B2DFFF;
+    border-radius: 50%
+}
+.ellipse2{
+    position: absolute;
+    width: 270px;
+    height: 270px;
+    left: 1220px;
+    top: 580px;
+    
+    background: #B2DFFF;
+    transform: rotate(100.53deg);
+    border-radius: 50%;
+}
+.group1{
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    left: 1100px;
+    top: 150px;
+}
+.group2{
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    left: 185px;
+    top: 520px;
+}
+.mainContent{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 82vw;
+    height: 75vh;
+    background-color: rgb(219, 241, 255);
+    border-radius: 10px;
+    margin:100px 120px
+}
+.forminput{
+    display: flex;
+    flex-direction: column;
+}
+.logoh1{
+    margin-bottom: 30px;
+    color:rgba(125, 140, 196, 1)
+}
+.userId{
+    margin: 10px 0;
+    padding: 10px;
+    width: 250px;
+}
+.password{
+    margin: 10px 0;
+    padding: 10px;
+    width: 250px;
+}
+.signIn{
+    margin: 10px 0;
+    padding: 10px;
+    background: #7D8CC4;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+}
+.SignUp{
+    margin: 10px 0;
+    padding: 10px;
+    background-color: rgb(219, 241, 255);
+    border: none;
+    cursor: pointer;
+}
+.credentials h4{
+    position: absolute;
+    top: 280px;
+    left: 600px;
+    color: darkgoldenrod;
+}

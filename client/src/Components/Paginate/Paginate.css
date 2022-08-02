@@ -1,0 +1,22 @@
+.pagination{
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 760px;
+    left: 1300px;
+}
+.pagination img{
+    margin: 0 10px;
+    cursor: pointer;
+}
+.pagination span{
+    color: rgba(203, 203, 203, 1);
+    margin: 0 2px;
+    cursor: pointer;
+}
+.highlight{
+    /* color:rgba(45, 165, 252, 1); */
+    color: black;
+    margin: 0 2px;
+    cursor: pointer;
+}

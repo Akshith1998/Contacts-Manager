@@ -1,0 +1,132 @@
+.sidehome{
+    background-color: transparent;
+    position: absolute;
+    width: 250px;
+    height: 810px;
+    left: 0px;
+    top: 0px;
+}
+.cont{
+    display: flex;
+    flex-direction: column;
+ 
+ }
+.sidebar{
+    position: absolute;
+    width: 250px;
+    height: 810px;
+    left: 0px;
+    top: 0px;
+    background: #CEF3FF;
+}
+.logo{
+    position: absolute;
+width: 83px;
+height: 61px;
+left: 80px;
+top: 0px;
+font-family: 'Titillium Web';
+font-style: normal;
+font-weight: 600;
+font-size: 30px;
+line-height: 15px;
+color: #0884FF;
+}
+.dashboard-icon{
+    position: absolute;
+    left: 15.5%;
+    right: 12.5%;
+    top: 124px;
+    bottom: 8.33%;
+
+/* background: #181818; */
+}
+.dashboard{
+    position: absolute;
+width: 84px;
+height: 27px;
+left: 72px;
+top: 120px;
+
+font-family: 'Titillium Web';
+font-style: normal;
+font-weight: 600;
+font-size: 18px;
+line-height: 27px;
+display: flex;
+align-items: center;
+
+color: #181818;
+
+}
+.buttontransparent{
+    position: absolute;
+    width: 183px;
+    height: 70px;
+    left: 24px;
+    top: 190px;
+    z-index: 1;
+    background: transparent
+
+}
+.contactButton{
+    display: flex;
+    align-items: center;
+    position: absolute;
+    width: 183px;
+    height: 70px;
+    left: 24px;
+    top: 190px;
+    z-index: 1;
+    background: #2DA5FC;
+    border-radius: 6px;
+}
+#total-contacts{
+    position: absolute;
+    width: 120px;
+    height: 27px;
+    left: 40px;
+    top: 0px;
+
+    font-family: 'Titillium Web';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    /* line-height: 17px; */
+
+    color: #FFFFFF;
+
+opacity: 0.8;
+}
+#contacts-icon{
+    position: absolute;
+left: 8%;
+right: 96.53%;
+top: 28%;
+bottom: 77.8%;
+}
+.logout-icon{
+    cursor: pointer;
+    position: absolute;
+left: 12.5%;
+right: 12.5%;
+top: 95%;
+bottom: 12.5%;
+}
+.logout-option{
+    position: absolute;
+width: 57px;
+height: 27px;
+left: 67px;
+top: 92%;
+cursor: pointer;
+font-family: 'Titillium Web';
+font-style: normal;
+font-weight: 400;
+font-size: 18px;
+line-height: 27px;
+
+color: #000000;
+
+opacity: 0.8;
+}
