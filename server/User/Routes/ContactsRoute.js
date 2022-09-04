@@ -27,6 +27,9 @@ router.post("/", (req, res) => {
 });
 
 router.put("/selected", (req, res) => {
+  let query = req.query.query;
+  let obj = {};
+  obj[query] = query;
   UserModal.find({ email: req.body.userdata.email })
     .then((user) => {
       if (user) {
@@ -34,7 +37,7 @@ router.put("/selected", (req, res) => {
           { user: user[0]._id },
           {
             $push: {
-              contacts: { $sort: { Name: 1 } },
+              contacts: { $each: [], $sort: { query: 1 } },
             },
           }
         )

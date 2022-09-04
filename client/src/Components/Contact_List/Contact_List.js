@@ -61,9 +61,20 @@ const ContactList = ({ contactsPresent, handlecontactsPresent }) => {
   };
 
   const handlesort = (e) => {
-    axios.put(
-      "https://contacts-manager-group4-server.herokuapp.com/contacts/selected"
-    );
+    axios({
+      url: `https://contacts-manager-group4-server.herokuapp.com/contacts/selected`,
+      headers: {
+        authorization: authToken,
+      },
+      method: "PUT",
+    })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    window.location.reload();
   };
 
   useEffect(() => {
@@ -80,7 +91,7 @@ const ContactList = ({ contactsPresent, handlecontactsPresent }) => {
       .catch((err) => {
         console.log(err);
       });
-  }, [handlecontactsPresent]);
+  }, []);
   return (
     <div
       id={isImport.length > 0 || isDelete.length > 0 ? "home" : undefined}
@@ -136,6 +147,7 @@ const ContactList = ({ contactsPresent, handlecontactsPresent }) => {
             <img src={downarrow} alt="" />
             <div className="filter">
               <div onClick={(e) => handlesort(e)}>Sort by:Name</div>
+              <div onClick={(e) => handlesort(e)}>Sort by:Country</div>
             </div>
           </div>
           <div
