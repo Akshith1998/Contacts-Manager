@@ -26,6 +26,29 @@ router.post("/", (req, res) => {
     });
 });
 
+router.put("/selected", (req, res) => {
+  UserModal.find({ email: req.body.userdata.email })
+    .then((user) => {
+      if (user) {
+        ContactModal.updateOne(
+          { user: user[0]._id },
+          {
+            $push: {
+              contacts: { $sort: { Name: 1 } },
+            },
+          }
+        )
+          .then(() => {
+            res.status(200).send("updated");
+          })
+          .catch((err) => {
+            res.status(200).send(err);
+          });
+      }
+    })
+    .catch((err) => res.status(400).send(err));
+});
+
 router.delete("/selected", (req, res) => {
   UserModal.find({ email: req.body.userdata.email })
     .then((user) => {

@@ -10,7 +10,8 @@ import axios from "axios";
 const Signup = () => {
   const [data, setData] = useState({});
   const navigate = useNavigate();
-  const [validate, setValidate] = useState(true);
+  const [validate, setValidate] = useState(false);
+  const [userexist, setUserexist] = useState(false);
   const handlesubmit = (e) => {
     e.preventDefault();
     axios
@@ -27,8 +28,11 @@ const Signup = () => {
         navigate("/");
       })
       .catch((err) => {
-        setValidate(false);
-        console.log(err);
+        if (err.response.data === "Email already exists.") {
+          setUserexist(true);
+        } else {
+          setValidate(true);
+        }
       });
   };
   return (
@@ -69,9 +73,14 @@ const Signup = () => {
                 Sign Up
               </button>
             </form>
-            {!validate && (
+            {validate && (
               <div className="validate">
                 <h4>Passwords doesn't match</h4>
+              </div>
+            )}
+            {userexist && (
+              <div className="validateuser">
+                <h4>User Exists</h4>
               </div>
             )}
           </div>

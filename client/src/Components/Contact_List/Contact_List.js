@@ -24,16 +24,17 @@ const ContactList = ({ contactsPresent, handlecontactsPresent }) => {
   const [isSearch, setIsSearch] = useState(false);
   const [isImport, setIsImport] = useState("");
   const [isDelete, setIsDelete] = useState("");
-  const [contactList, setContactList] = useState([]);
+  let [contactList, setContactList] = useState([]);
   const [contactdelete, setContactdelete] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [contactsPerPage] = useState(8);
   const indexOfLastContact = currentPage * contactsPerPage;
   const indexOfFirstContact = indexOfLastContact - contactsPerPage;
-  const currentContacts = contactsPresent.slice(
+  const currentContacts = contactList.slice(
     indexOfFirstContact,
     indexOfLastContact
   );
+
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
   const importfunct = (val) => {
     setIsImport("");
@@ -50,7 +51,21 @@ const ContactList = ({ contactsPresent, handlecontactsPresent }) => {
     handlecontactsPresent(contactList);
     navigate("/contacts");
   };
-  // console.log(contactdelete);
+
+  const handlefilter = () => {
+    document.querySelector(".filter").style.display = "block";
+  };
+
+  const handleremovefilter = () => {
+    document.querySelector(".filter").style.display = "none";
+  };
+
+  const handlesort = (e) => {
+    axios.put(
+      "https://contacts-manager-group4-server.herokuapp.com/contacts/selected"
+    );
+  };
+
   useEffect(() => {
     axios
       .get("https://contacts-manager-group4-server.herokuapp.com/contacts", {
@@ -65,7 +80,7 @@ const ContactList = ({ contactsPresent, handlecontactsPresent }) => {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [handlecontactsPresent]);
   return (
     <div
       id={isImport.length > 0 || isDelete.length > 0 ? "home" : undefined}
@@ -111,11 +126,17 @@ const ContactList = ({ contactsPresent, handlecontactsPresent }) => {
                 ? "buttontrans second"
                 : "button second"
             }
+            onClick={handlefilter}
+            onMouseEnter={handlefilter}
+            onMouseLeave={handleremovefilter}
           >
             <img src={vectorlogo} alt="" />
             <span>Filters</span>
             <img src={linelogo} alt="" />
             <img src={downarrow} alt="" />
+            <div className="filter">
+              <div onClick={(e) => handlesort(e)}>Sort by:Name</div>
+            </div>
           </div>
           <div
             className={

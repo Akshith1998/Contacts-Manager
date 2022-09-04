@@ -8,10 +8,7 @@ const UserController = require("./User/Routes/UserRoute");
 const routes = ["/user/login", "/user/signup", "/"];
 const jwt = require("jsonwebtoken");
 const cors = require("cors");
-const aws = require("aws-sdk");
-let s3 = new aws.S3({
-  secretAccessKey: process.env.SECRET_KEY,
-});
+
 if (process.env.NODE_ENV === "production") {
   app.use((req, res, next) => {
     if (req.header("x-forwarded-proto") !== "https")
