@@ -24,13 +24,15 @@ const ContactList = ({ contactsPresent, handlecontactsPresent }) => {
   const [isSearch, setIsSearch] = useState(false);
   const [isImport, setIsImport] = useState("");
   const [isDelete, setIsDelete] = useState("");
+  const [order, setOrder] = useState("asc");
   let [contactList, setContactList] = useState([]);
+  let [filteredContacts, setFilteredContacts] = useState([]);
   const [contactdelete, setContactdelete] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [contactsPerPage] = useState(8);
   const indexOfLastContact = currentPage * contactsPerPage;
   const indexOfFirstContact = indexOfLastContact - contactsPerPage;
-  const currentContacts = contactList.slice(
+  const currentContacts = contactsPresent.slice(
     indexOfFirstContact,
     indexOfLastContact
   );
@@ -60,6 +62,21 @@ const ContactList = ({ contactsPresent, handlecontactsPresent }) => {
     document.querySelector(".filter").style.display = "none";
   };
 
+  const handlefilterheader = (property) => {
+    document.querySelector(".searchDesignation").style.display = "block";
+
+    let filter = contactList.map((contact) => {
+      return contact[property];
+    });
+    let set = new Set([...filter]);
+    filter = [...set];
+    setFilteredContacts(filter);
+  };
+
+  const handleremovefilterheader = () => {
+    document.querySelector(".searchDesignation").style.display = "none";
+  };
+
   const handlesort = (property, order) => {
     let contact = Array.from(contactList);
     const sortDynamic = (property, order) => {
@@ -78,6 +95,20 @@ const ContactList = ({ contactsPresent, handlecontactsPresent }) => {
     };
     let sortcontacts = contact.sort(sortDynamic(property, order));
     setContactList(sortcontacts);
+    handlecontactsPresent(sortcontacts);
+    if (order === "asc") {
+      setOrder("des");
+    } else {
+      setOrder("asc");
+    }
+  };
+
+  const handlefilteredcontact = (contact, property) => {
+    let filter = contactList.filter((contacts) => {
+      return Object.values(contacts).includes(contact);
+    });
+    console.log(filter);
+    handlecontactsPresent(filter);
   };
 
   useEffect(() => {
@@ -141,7 +172,6 @@ const ContactList = ({ contactsPresent, handlecontactsPresent }) => {
                 : "button second"
             }
             onClick={handlefilter}
-            onMouseEnter={handlefilter}
             onMouseLeave={handleremovefilter}
           >
             <img src={vectorlogo} alt="" />
@@ -149,9 +179,47 @@ const ContactList = ({ contactsPresent, handlecontactsPresent }) => {
             <img src={linelogo} alt="" />
             <img src={downarrow} alt="" />
             <div className="filter">
-              <div onClick={() => handlesort("Name", "asc")}>Sort by:Name</div>
-              <div onClick={() => handlesort("Country", "asc")}>
-                Sort by:Country
+              <div
+                className="filterDesignation"
+                onClick={() => handlefilterheader("Designation")}
+              >
+                Designation
+              </div>
+              <div
+                className="searchDesignation"
+                onMouseLeave={handleremovefilterheader}
+              >
+                {filteredContacts.map((contact) => {
+                  return (
+                    <div
+                      onClick={() =>
+                        handlefilteredcontact(contact, "Designation")
+                      }
+                    >
+                      {contact}
+                    </div>
+                  );
+                })}
+              </div>
+              <div
+                className="filterDesignation"
+                onClick={() => handlefilterheader("Company")}
+              >
+                Company
+              </div>
+              <div
+                className="searchDesignation"
+                onMouseLeave={handleremovefilterheader}
+              >
+                {filteredContacts.map((contact) => {
+                  return (
+                    <div
+                      onClick={() => handlefilteredcontact(contact, "Company")}
+                    >
+                      {contact}
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </div>
@@ -212,7 +280,7 @@ const ContactList = ({ contactsPresent, handlecontactsPresent }) => {
                 src={updownlogo}
                 alt=""
                 className="arrows"
-                onClick={() => handlesort("Designation", "asc")}
+                onClick={() => handlesort("Designation", order)}
               />
             </div>
             <div className="Company">
@@ -222,7 +290,7 @@ const ContactList = ({ contactsPresent, handlecontactsPresent }) => {
                 src={updownlogo}
                 alt=""
                 className="arrows"
-                onClick={() => handlesort("Company", "asc")}
+                onClick={() => handlesort("Company", order)}
               />
             </div>
             <div className="Industry">
@@ -232,7 +300,7 @@ const ContactList = ({ contactsPresent, handlecontactsPresent }) => {
                 src={updownlogo}
                 alt=""
                 className="arrows"
-                onClick={() => handlesort("Industry", "asc")}
+                onClick={() => handlesort("Industry", order)}
               />
             </div>
             <div className="Email">

@@ -186,3 +186,15 @@
     border-style: solid;
     border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
 }
+.filterDesignation{
+    position: relative;
+}
+.searchDesignation{
+    display: none;
+    position: absolute;
+    background-color: white;
+    left:90px;
+    padding: 15px;
+    top: -10px;
+    width: 150px;
+}
