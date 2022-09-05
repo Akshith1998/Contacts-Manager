@@ -156,6 +156,7 @@
 .arrows{
     margin-left: 5px;
     margin-right: 0px;
+    cursor: pointer;
 }
 .Email h4:hover .tooltip{
     visibility: visible;

@@ -60,21 +60,24 @@ const ContactList = ({ contactsPresent, handlecontactsPresent }) => {
     document.querySelector(".filter").style.display = "none";
   };
 
-  const handlesort = (e) => {
-    axios({
-      url: `https://contacts-manager-group4-server.herokuapp.com/contacts/selected`,
-      headers: {
-        authorization: authToken,
-      },
-      method: "PUT",
-    })
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    window.location.reload();
+  const handlesort = (property, order) => {
+    let contact = Array.from(contactList);
+    const sortDynamic = (property, order) => {
+      const sortOrder = order === "asc" ? 1 : -1;
+      return (a, b) => {
+        const A = a[property];
+        const B = b[property];
+        if (A < B) {
+          return sortOrder * -1;
+        } else if (A > B) {
+          return sortOrder * 1;
+        } else {
+          return 0;
+        }
+      };
+    };
+    let sortcontacts = contact.sort(sortDynamic(property, order));
+    setContactList(sortcontacts);
   };
 
   useEffect(() => {
@@ -146,8 +149,10 @@ const ContactList = ({ contactsPresent, handlecontactsPresent }) => {
             <img src={linelogo} alt="" />
             <img src={downarrow} alt="" />
             <div className="filter">
-              <div onClick={(e) => handlesort(e)}>Sort by:Name</div>
-              <div onClick={(e) => handlesort(e)}>Sort by:Country</div>
+              <div onClick={() => handlesort("Name", "asc")}>Sort by:Name</div>
+              <div onClick={() => handlesort("Country", "asc")}>
+                Sort by:Country
+              </div>
             </div>
           </div>
           <div
@@ -203,17 +208,32 @@ const ContactList = ({ contactsPresent, handlecontactsPresent }) => {
             <div className="Designation">
               <img src={linelogo} alt="" className="line" />
               <h3>Designation</h3>
-              <img src={updownlogo} alt="" className="arrows" />
+              <img
+                src={updownlogo}
+                alt=""
+                className="arrows"
+                onClick={() => handlesort("Designation", "asc")}
+              />
             </div>
             <div className="Company">
               <img src={linelogo} alt="" className="line" />
               <h3>Company</h3>
-              <img src={updownlogo} alt="" className="arrows" />
+              <img
+                src={updownlogo}
+                alt=""
+                className="arrows"
+                onClick={() => handlesort("Company", "asc")}
+              />
             </div>
             <div className="Industry">
               <img src={linelogo} alt="" className="line" />
               <h3>Industry</h3>
-              <img src={updownlogo} alt="" className="arrows" />
+              <img
+                src={updownlogo}
+                alt=""
+                className="arrows"
+                onClick={() => handlesort("Industry", "asc")}
+              />
             </div>
             <div className="Email">
               <img src={linelogo} alt="" className="line" />
@@ -243,6 +263,7 @@ const ContactList = ({ contactsPresent, handlecontactsPresent }) => {
                       ? "transfield"
                       : "contacts"
                   }
+                  key={contact._id}
                 >
                   <input
                     type="checkbox"
